@@ -58,29 +58,13 @@
         <div class="container">
             <img class="loader" src="assets/loading.gif" />
         </div>
+        <script>
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('flutter-first-frame', function () {
+                navigator.serviceWorker.register('flutter_service_worker.js');
+              });
+            }
+        </script>
         <script src="main.dart.js" type="application/javascript"></script>
-        <script>
-            window.addEventListener('load', function (ev) {
-                // Download main.dart.js
-                _flutter.loader.loadEntrypoint({
-                    serviceWorker: {
-                        serviceWorkerVersion: serviceWorkerVersion,
-                    },
-                    onEntrypointLoaded: function (engineInitializer) {
-                        engineInitializer
-                            .initializeEngine()
-                            .then(function (appRunner) {
-                                appRunner.runApp();
-                            });
-                    },
-                });
-            });
-        </script>
-        <script>
-            window.addEventListener('flutter-first-frame', function () {
-                var el = document.getElementsByClassName('container')[0];
-                el.remove();
-            });
-        </script>
     </body>
 </html>
